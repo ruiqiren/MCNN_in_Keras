@@ -8,17 +8,15 @@
 import numpy as np
 import cv2
 import os
-import random
 import pandas as pd
 
 
 class DataLoader(object):
-    def __init__(self, data_path, gt_path, shuffle=False, gt_downsample=False, pre_load=False):
+    def __init__(self, data_path, gt_path, shuffle=False, gt_downsample=False):
         self.data_path = data_path
         self.gt_path = gt_path
         self.shuffle = shuffle
         self.gt_downsample = gt_downsample
-        self.pre_load = pre_load
         self.data_files = [filename for filename in os.listdir(data_path)]
         self.num_samples = len(self.data_files)
         self.blob_list = []
