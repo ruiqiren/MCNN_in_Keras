@@ -31,20 +31,19 @@ class DataLoader(object):
             img = cv2.resize(img, (wd_1, ht_1))
             img = img.reshape((img.shape[0], img.shape[1], 1))
             den = pd.read_csv(os.path.join(self.gt_path, os.path.splitext(fname)[0] + '.csv'),
-                              header=None).as_matrix()
+                              header=None).values
             den = den.astype(np.float32, copy=False)
             if self.gt_downsample:
                 wd_1 = int(wd_1 / 4)
                 ht_1 = int(ht_1 / 4)
-                den = cv2.resize(den, (wd_1, ht_1))
-                den = den * ((wd * ht) / (wd_1 * ht_1))
-            else:
-                den = cv2.resize(den, (wd_1, ht_1))
-                den = den * ((wd * ht) / (wd_1 * ht_1))
+            den = cv2.resize(den, (wd_1, ht_1))
+            den = den * ((wd * ht) / (wd_1 * ht_1))
             den = den.reshape((den.shape[0], den.shape[1], 1))
+
             blob = dict()
             blob['data'] = img
             blob['gt'] = den
+            blob['fname'] = fname
             self.blob_list.append(blob)
 
         if self.shuffle:
@@ -58,3 +57,12 @@ class DataLoader(object):
             X_batch = np.array([blob['data'] for blob in blobs])
             Y_batch = np.array([blob['gt'] for blob in blobs])
             yield X_batch, Y_batch
+
+    def get_all(self):
+        X = np.array([blob['data'] for blob in self.blob_list])
+        Y = np.array([blob['gt'] for blob in self.blob_list])
+        return X, Y
+
+    def __iter__(self):
+        for blob in self.blob_list:
+            yield blob

@@ -23,6 +23,7 @@ def MCNN(input_shape=None):
     # column 2
     column_2 = Conv2D(20, (7, 7), padding='same', activation='relu')(inputs)
     column_2 = MaxPooling2D(2)(column_2)
+    column_2 = (column_2)
     column_2 = Conv2D(40, (5, 5), padding='same', activation='relu')(column_2)
     column_2 = MaxPooling2D(2)(column_2)
     column_2 = Conv2D(20, (5, 5), padding='same', activation='relu')(column_2)
@@ -31,6 +32,7 @@ def MCNN(input_shape=None):
     # column 3
     column_3 = Conv2D(24, (5, 5), padding='same', activation='relu')(inputs)
     column_3 = MaxPooling2D(2)(column_3)
+    column_3 = (column_3)
     column_3 = Conv2D(48, (3, 3), padding='same', activation='relu')(column_3)
     column_3 = MaxPooling2D(2)(column_3)
     column_3 = Conv2D(24, (3, 3), padding='same', activation='relu')(column_3)
@@ -39,7 +41,7 @@ def MCNN(input_shape=None):
     # merge feature map of 3 columns in last dimension
     merges = Concatenate(axis=-1)([column_1, column_2, column_3])
     # density map
-    density_map = Conv2D(1, (1, 1), padding='same', activation='relu')(merges)
+    density_map = Conv2D(1, (1, 1), padding='same')(merges)
 
     model = Model(inputs=inputs, outputs=density_map)
     return model
