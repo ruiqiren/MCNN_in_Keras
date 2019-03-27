@@ -15,6 +15,7 @@ def MCNN(input_shape=None):
     # column 1
     column_1 = Conv2D(16, (9, 9), padding='same', activation='relu')(inputs)
     column_1 = MaxPooling2D(2)(column_1)
+    column_1 = (column_1)
     column_1 = Conv2D(32, (7, 7), padding='same', activation='relu')(column_1)
     column_1 = MaxPooling2D(2)(column_1)
     column_1 = Conv2D(16, (7, 7), padding='same', activation='relu')(column_1)
