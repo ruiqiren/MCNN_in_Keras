@@ -1,3 +1,5 @@
+# This file is used to save the global configurations
+
 MODEL_DIR = './trained_models/'
 
 TRAIN_PATH = './data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/train'
@@ -12,7 +14,7 @@ TEST_PATH = './data/original/shanghaitech/part_{}_final/test_data/images/'
 
 TEST_GT_PATH = './data/original/shanghaitech/part_{}_final/test_data/ground_truth_csv/'
 
-EPOCHS = 20
+EPOCHS = 200
 
 TRAIN_BATCH_SIZE = 32
 
