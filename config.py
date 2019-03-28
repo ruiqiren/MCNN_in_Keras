@@ -2,17 +2,17 @@
 
 MODEL_DIR = './trained_models/'
 
-TRAIN_PATH = './data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/train'
+TRAIN_PATH = '/opt/dataset/crowd_counting/data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/train'
 
-TRAIN_GT_PATH = './data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/train_den'
+TRAIN_GT_PATH = '/opt/dataset/crowd_counting/data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/train_den'
 
-VAL_PATH = './data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/val'
+VAL_PATH = '/opt/dataset/crowd_counting/data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/val'
 
-VAL_GT_PATH = './data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/val_den'
+VAL_GT_PATH = '/opt/dataset/crowd_counting/data/formatted_trainval_{0}/shanghaitech_part_{0}_patches_9/val_den'
 
-TEST_PATH = './data/original/shanghaitech/part_{}_final/test_data/images/'
+TEST_PATH = '/opt/dataset/crowd_counting/data/original/shanghaitech/part_{}_final/test_data/images/'
 
-TEST_GT_PATH = './data/original/shanghaitech/part_{}_final/test_data/ground_truth_csv/'
+TEST_GT_PATH = '/opt/dataset/crowd_counting/data/original/shanghaitech/part_{}_final/test_data/ground_truth_csv/'
 
 EPOCHS = 200
 
