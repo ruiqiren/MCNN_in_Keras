@@ -27,8 +27,8 @@ else:
     exit()
 print('Testing Part_{} ...'.format(dataset))
 
-test_path = cfg.test_path.format(dataset)
-test_gt_path = cfg.test_gt_path.format(dataset)
+test_path = cfg.TEST_PATH.format(dataset)
+test_gt_path = cfg.TEST_GT_PATH.format(dataset)
 
 if dataset == 'A':
     model_path = './trained_models/mcnn_A_train.hdf5'
@@ -57,8 +57,9 @@ for blob in data_loader:
     pred_count = np.sum(pred)
     mae += abs(gt_count - pred_count)
     mse += ((gt_count - pred_count) * (gt_count - pred_count))
-    # save density map
-    save_density_map(density_maps_dir, pred, blob['fname'].split('.')[0] + '.png')
+    # # save density map
+    # save_density_map(density_maps_dir, pred, blob['fname'].split('.')[0] + '.png')
+
     # save results
     with open(results_txt, 'a') as f:
         line = '<{}> {:.2f} -- {:.2f}\n'.format(blob['fname'].split('.')[0], gt_count, pred_count)

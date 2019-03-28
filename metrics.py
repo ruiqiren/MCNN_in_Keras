@@ -13,4 +13,4 @@ def mae(y_true, y_pred):
 
 
 def mse(y_true, y_pred):
-    return K.square(K.sum(y_true) - K.sum(y_pred))
+    return (K.sum(y_true) - K.sum(y_pred)) * (K.sum(y_true) - K.sum(y_pred))
