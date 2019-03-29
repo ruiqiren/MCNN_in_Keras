@@ -1,10 +1,4 @@
 # -*- coding:utf-8 _*-
-"""
-@author: steven.yi
-@date: 2019/3/21
-@file: model.py
-@description: MCNN 模型定义
-"""
 from keras.models import Model
 from keras.layers import Conv2D, MaxPooling2D, Input, Concatenate
 
