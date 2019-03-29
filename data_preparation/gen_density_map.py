@@ -20,7 +20,7 @@ def gen_density_map(img, anno_points):
 
     # 若只有一个标注数据
     if anno_points.shape[0] == 1:
-        x = (max(0, min(w-1, round(anno_points[0, 0]))))
+        x = max(0, min(w-1, round(anno_points[0, 0])))
         y = max(0, min(h-1, round(anno_points[0, 1])))
         density_map[int(y), int(x)] = 255
         return density_map
@@ -34,10 +34,10 @@ def gen_density_map(img, anno_points):
         if x >= w or y >= h:
             continue
 
-        x1 = x - f_sz // 2
-        y1 = y - f_sz // 2
-        x2 = x + f_sz // 2 + 1
-        y2 = y + f_sz // 2 + 1
+        # 左上角坐标以及右下角坐标
+        x1, y1 = x - f_sz // 2, y - f_sz // 2
+        x2, y2 = x + f_sz // 2 + 1, y + f_sz // 2 + 1
+
         dfx1, dfy1, dfx2, dfy2 = 0, 0, 0, 0
         change = False
         if x1 < 0:
@@ -61,4 +61,4 @@ def gen_density_map(img, anno_points):
             H = np.multiply(cv2.getGaussianKernel(y2h-y1h+1, sigma), (cv2.getGaussianKernel(x2h-x1h+1, sigma)).T)
 
         density_map[y1:y2, x1:x2] += H
-        return density_map
+    return density_map
