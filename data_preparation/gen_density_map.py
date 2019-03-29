@@ -1,10 +1,4 @@
 # -*- coding:utf-8 _*-
-"""
-@author: steven.yi
-@date: 2019/3/22
-@file: get_density_map.py
-@description: 生成密度图矩阵
-"""
 import cv2
 import math
 import numpy as np
