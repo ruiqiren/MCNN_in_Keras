@@ -1,10 +1,4 @@
 # -*- coding:utf-8 _*-
-"""
-@author: steven.yi
-@date: 2019/3/22
-@file: data_generater.py
-@description: 生成训练数据
-"""
 import numpy as np
 import cv2
 import os

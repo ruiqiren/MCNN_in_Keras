@@ -1,10 +1,4 @@
 # -*- coding:utf-8 _*-
-"""
-@author: steven.yi
-@date: 2019/3/26
-@file: test.py
-@description: test
-"""
 from keras.models import load_model
 from utils.data_loader import DataLoader
 import numpy as np
@@ -32,7 +26,7 @@ def main(args):
     if dataset == 'A':
         model_path = './trained_models/mcnn_A_train.hdf5'
     else:
-        model_path = './trained_models/mcnn_B_train.hdf5'
+        model_path = './trained_models/mcnn_B_train_generator.hdf5'
 
     output_dir = './output_{}/'.format(dataset)
     density_maps_dir = os.path.join(output_dir, 'density_maps')  # directory to save predicted density map

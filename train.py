@@ -1,17 +1,11 @@
 # -*- coding:utf-8 _*-
-"""
-@author: steven.yi
-@date: 2019/3/22
-@file: train.py
-@description: 训练
-"""
 from keras.optimizers import Adam
-from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau
+from keras.callbacks import ModelCheckpoint
 from model import MCNN
 from utils.data_loader import DataLoader
+from utils.metrics import mae, mse
 import config as cfg
 import os
-from metrics import mae, mse
 import argparse
 
 
@@ -36,12 +30,10 @@ def main(args):
 
     # 定义callback
     checkpointer_best_train = ModelCheckpoint(
-        filepath=os.path.join(cfg.MODEL_DIR, 'mcnn_'+dataset+'_train.hdf5'),
+        filepath=os.path.join(cfg.MODEL_DIR, 'mcnn_'+dataset+'_train_generator.hdf5'),
         monitor='loss', verbose=1, save_best_only=True, mode='min'
     )
-    lr_reducer = ReduceLROnPlateau(monitor='loss', factor=0.1,
-                                   cooldown=0, patience=10, min_lr=0)
-    callback_list = [checkpointer_best_train, lr_reducer]
+    callback_list = [checkpointer_best_train]
 
     # 训练
     print('Training Part_{} ...'.format(dataset))
