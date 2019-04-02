@@ -4,5 +4,3 @@ scipy==1.1.0
 numpy==1.15.0
 pandas==0.22.0
 pyheatmap==0.1.12
-
-# pip install -r requirements.txt
