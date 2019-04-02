@@ -10,6 +10,7 @@ import argparse
 
 
 def main(args):
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     dataset = args.dataset  # 'A' or 'B'
 
     train_path = cfg.TRAIN_PATH.format(dataset)
@@ -37,19 +38,19 @@ def main(args):
 
     # 训练
     print('Training Part_{} ...'.format(dataset))
-    model.fit(
-        x=x_train, y=y_train, batch_size=1, epochs=cfg.EPOCHS,
-        validation_data=(x_val, y_val),
-        callbacks=callback_list
-    )
+    # model.fit(
+    #     x=x_train, y=y_train, batch_size=1, epochs=cfg.EPOCHS,
+    #     validation_data=(x_val, y_val),
+    #     callbacks=callback_list
+    # )
 
-    # model.fit_generator(train_data_gen.flow(cfg.TRAIN_BATCH_SIZE),
-    #                     steps_per_epoch=train_data_gen.num_samples // cfg.TRAIN_BATCH_SIZE,
-    #                     validation_data=val_data_gen.flow(cfg.VAL_BATCH_SIZE),
-    #                     validation_steps=val_data_gen.num_samples // cfg.VAL_BATCH_SIZE,
-    #                     epochs=cfg.EPOCHS,
-    #                     callbacks=callback_list,
-    #                     verbose=1)
+    model.fit_generator(train_data_gen.flow(1),
+                        steps_per_epoch=train_data_gen.num_samples // 1,
+                        validation_data=val_data_gen.flow(cfg.VAL_BATCH_SIZE),
+                        validation_steps=val_data_gen.num_samples // cfg.VAL_BATCH_SIZE,
+                        epochs=cfg.EPOCHS,
+                        callbacks=callback_list,
+                        verbose=1)
 
 
 if __name__ == '__main__':
