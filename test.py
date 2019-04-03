@@ -1,4 +1,4 @@
-# -*- coding:utf-8 _*-
+# -*- coding:utf-8 -*-
 from keras.models import load_model
 from utils.data_loader import DataLoader
 from utils.heatmap import save_heatmap
@@ -17,7 +17,7 @@ def main(args):
         model_path = './trained_models/mcnn_B_train.hdf5'
 
     output_dir = './output_{}/'.format(dataset)
-    heatmaps_dir = os.path.join(output_dir, 'featmaps')  # directory to save featmap
+    heatmaps_dir = os.path.join(output_dir, 'heatmaps')  # directory to save featmap
     results_txt = os.path.join(output_dir, 'results.txt')  # file to save predicted results
     for _dir in [output_dir, heatmaps_dir]:
         if not os.path.exists(_dir):

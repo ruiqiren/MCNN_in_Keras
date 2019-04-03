@@ -1,4 +1,4 @@
-# -*- coding:utf-8 _*-
+# -*- coding:utf-8 -*-
 from keras.optimizers import Adam
 from keras.callbacks import ModelCheckpoint
 from model import MCNN
@@ -31,26 +31,35 @@ def main(args):
 
     # 定义callback
     checkpointer_best_train = ModelCheckpoint(
-        filepath=os.path.join(cfg.MODEL_DIR, 'mcnn_'+dataset+'_train_generator.hdf5'),
+        filepath=os.path.join(cfg.MODEL_DIR, 'mcnn_'+dataset+'_train.hdf5'),
         monitor='loss', verbose=1, save_best_only=True, mode='min'
     )
     callback_list = [checkpointer_best_train]
 
     # 训练
     print('Training Part_{} ...'.format(dataset))
-    # model.fit(
-    #     x=x_train, y=y_train, batch_size=1, epochs=cfg.EPOCHS,
-    #     validation_data=(x_val, y_val),
-    #     callbacks=callback_list
-    # )
-
-    model.fit_generator(train_data_gen.flow(1),
-                        steps_per_epoch=train_data_gen.num_samples // 1,
-                        validation_data=val_data_gen.flow(cfg.VAL_BATCH_SIZE),
-                        validation_steps=val_data_gen.num_samples // cfg.VAL_BATCH_SIZE,
-                        epochs=cfg.EPOCHS,
-                        callbacks=callback_list,
-                        verbose=1)
+    # model.fit_generator(train_data_gen.flow(cfg.TRAIN_BATCH_SIZE),
+    #                     steps_per_epoch=train_data_gen.num_samples // cfg.TRAIN_BATCH_SIZE,
+    #                     validation_data=val_data_gen.flow(cfg.VAL_BATCH_SIZE),
+    #                     validation_steps=val_data_gen.num_samples // cfg.VAL_BATCH_SIZE,
+    #                     epochs=cfg.EPOCHS,
+    #                     callbacks=callback_list,
+    #                     verbose=1)
+    if dataset == 'A':
+        # 由于Part_A中图片尺寸不一样, 所以训练的时候需要一张张的送入模型
+        model.fit_generator(train_data_gen.flow(1),
+                            steps_per_epoch=train_data_gen.num_samples // 1,
+                            validation_data=val_data_gen.flow(cfg.VAL_BATCH_SIZE),
+                            validation_steps=val_data_gen.num_samples // cfg.VAL_BATCH_SIZE,
+                            epochs=cfg.EPOCHS,
+                            callbacks=callback_list,
+                            verbose=1)
+    else:
+        model.fit(
+            x=x_train, y=y_train, batch_size=1, epochs=cfg.EPOCHS,
+            validation_data=(x_val, y_val),
+            callbacks=callback_list
+        )
 
 
 if __name__ == '__main__':
