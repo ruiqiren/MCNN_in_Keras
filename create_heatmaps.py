@@ -9,10 +9,11 @@ import os
 
 def main(args):
     dataset = args.dataset  # 'A' or 'B'
-    output_dir = os.path.join(cfg.HM_GT_PATH, './heatmaps_{}/'.format(dataset))
+    output_dir = os.path.join(cfg.HM_GT_PATH, 'Part_{}'.format(dataset))
 
-    if not os.path.exists(output_dir):
-        os.mkdir(output_dir)
+    for _dir in [cfg.HM_GT_PATH, output_dir]:
+        if not os.path.exists(_dir):
+            os.mkdir(_dir)
 
     test_path = cfg.TEST_PATH.format(dataset)
     test_gt_path = cfg.TEST_GT_PATH.format(dataset)
