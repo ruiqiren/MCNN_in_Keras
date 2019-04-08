@@ -2,6 +2,7 @@
 import numpy as np
 import os
 from pyheatmap.heatmap import HeatMap
+from PIL import Image
 
 
 def save_heatmap(density_map, blob, imgs_dir, output_dir, down_sample=True):
@@ -34,6 +35,14 @@ def save_heatmap(density_map, blob, imgs_dir, output_dir, down_sample=True):
             for k in range(int(density_map[row][col])):
                 data.append([col + 1, row + 1])
     # 生成heatmap
-    hm = HeatMap(data, base=os.path.join(imgs_dir, img_name))
-    # 保存
-    hm.heatmap(save_as=os.path.join(output_dir, 'heatmap_'+img_name.split('.')[0]+'.png'))
+    hm = HeatMap(data)
+    # 保存heatmap
+    hm_name = 'heatmap_'+img_name.split('.')[0]+'.png'
+    hm.heatmap(save_as=os.path.join(output_dir, hm_name))
+
+    # 使用蓝色填充heatmap背景
+    im = Image.open(os.path.join(output_dir, hm_name))
+    x, y = im.size
+    bg = Image.new('RGBA', im.size, (0, 0, 139))
+    bg.paste(im, (0, 0, x, y), im)
+    bg.save(os.path.join(output_dir, hm_name))
