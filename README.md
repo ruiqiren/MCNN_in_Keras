@@ -65,7 +65,7 @@ python test.py [A or B]  # Part_A or Part_B
 原图：  
 ![原图](./examples/IMG_148.jpg)   
 Ground truth    
-![GT](./examples/heatmap_gt_IMG_148.png "Ground Truth") ![Estimate](./examples/heatmap_IMG_148.png "Estimate")
+![GT](./examples/heatmap_gt_IMG_148.png "Ground Truth")![Estimate](./examples/heatmap_IMG_148.png "Estimate")
 
 
 ## todo
