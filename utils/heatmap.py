@@ -37,7 +37,7 @@ def save_heatmap(density_map, blob, imgs_dir, output_dir, down_sample=True):
             for k in range(int(density_map[row][col])):
                 data.append([col + 1, row + 1])
     # 生成heatmap
-    hm = HeatMap(data)
+    hm = HeatMap(data, width=w, height=h)
     # 保存heatmap
     hm_name = 'heatmap_'+img_name.split('.')[0]+'.png'
     hm.heatmap(save_as=os.path.join(output_dir, hm_name))
