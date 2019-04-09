@@ -61,8 +61,13 @@ python test.py [A or B]  # Part_A or Part_B
     ---------------------------
     | Part_B |  33.7 |  58.9  |
 
-Part_B:  
-![原图](./examples/IMG_148.jpg) ![GT](./examples/heatmap_gt_IMG_148.png)
+**Part_B**   
+原图:  
+![原图](./examples/IMG_148.jpg)   
+Ground Truth:  
+![GT](./examples/heatmap_gt_IMG_148.png)  
+Estimate:
+
 
 ## todo
 训练Part_A部分，由于Part_A部分的图片大小不一样，需要修改训练代码。
