@@ -17,11 +17,9 @@ def main(args):
     train_gt_path = cfg.TRAIN_GT_PATH.format(dataset)
     val_path = cfg.VAL_PATH.format(dataset)
     val_gt_path = cfg.VAL_GT_PATH.format(dataset)
-    # 生成训练数据和验证数据
+    # 加载数据生成器
     train_data_gen = DataLoader(train_path, train_gt_path, shuffle=True, gt_downsample=True)
     val_data_gen = DataLoader(val_path, val_gt_path, shuffle=False, gt_downsample=True)
-    x_train, y_train = train_data_gen.get_all()
-    x_val, y_val = val_data_gen.get_all()
 
     # 定义模型
     input_shape = (None, None, 1)
@@ -38,28 +36,13 @@ def main(args):
 
     # 训练
     print('Training Part_{} ...'.format(dataset))
-    # model.fit_generator(train_data_gen.flow(cfg.TRAIN_BATCH_SIZE),
-    #                     steps_per_epoch=train_data_gen.num_samples // cfg.TRAIN_BATCH_SIZE,
-    #                     validation_data=val_data_gen.flow(cfg.VAL_BATCH_SIZE),
-    #                     validation_steps=val_data_gen.num_samples // cfg.VAL_BATCH_SIZE,
-    #                     epochs=cfg.EPOCHS,
-    #                     callbacks=callback_list,
-    #                     verbose=1)
-    if dataset == 'A':
-        # 由于Part_A中图片尺寸不一样, 所以训练的时候需要一张张的送入模型
-        model.fit_generator(train_data_gen.flow(1),
-                            steps_per_epoch=train_data_gen.num_samples // 1,
-                            validation_data=val_data_gen.flow(cfg.VAL_BATCH_SIZE),
-                            validation_steps=val_data_gen.num_samples // cfg.VAL_BATCH_SIZE,
-                            epochs=cfg.EPOCHS,
-                            callbacks=callback_list,
-                            verbose=1)
-    else:
-        model.fit(
-            x=x_train, y=y_train, batch_size=1, epochs=cfg.EPOCHS,
-            validation_data=(x_val, y_val),
-            callbacks=callback_list
-        )
+    model.fit_generator(train_data_gen.flow(cfg.TRAIN_BATCH_SIZE),
+                        steps_per_epoch=train_data_gen.num_samples // cfg.TRAIN_BATCH_SIZE,
+                        validation_data=val_data_gen.flow(cfg.VAL_BATCH_SIZE),
+                        validation_steps=val_data_gen.num_samples // cfg.VAL_BATCH_SIZE,
+                        epochs=cfg.EPOCHS,
+                        callbacks=callback_list,
+                        verbose=1)
 
 
 if __name__ == '__main__':
