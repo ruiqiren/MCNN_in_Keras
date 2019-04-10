@@ -35,14 +35,14 @@ keras实现的人群数量估计网络["Single Image Crowd Counting via Multi Co
 5. 生成训练集和验证集
     ```shell
     cd data_preparation
-    python create_training_set_shtech.py [A or B]  # Part_A or Part_B
+    python create_training_set_shtech.py [A or B]
     ```
     生成好的数据保存将会在./data/formatted_trainval_【A or B】目录下
 
 6. 生成热力图  
     如果你想生成测试集的ground truth热力图：
     ```shell
-    python create_heatmaps.py [A or B]  # Part_A or Part_B
+    python create_heatmaps.py [A or B]
     ```
     生成好的热力图将会保存在./heatmaps_gt目录下
 
@@ -51,14 +51,14 @@ keras实现的人群数量估计网络["Single Image Crowd Counting via Multi Co
 ## 测试
 在./trained_models目录中存放了已经训练好的模型，你可以直接用来测试：
 ```shell
-python test.py [A or B]  # Part_A or Part_B
+python test.py [A or B]
 ```
 测试结果将会保存在./output_【A or B】目录下
 
 ## 训练
 如果你想自己训练模型，很简单：
 ```shell
-python train.py [A or B]  # Part_A or Part_B
+python train.py [A or B]
 ```
 训练好的模型将会保存在./trained_models目录下
 
@@ -73,12 +73,12 @@ python train.py [A or B]  # Part_A or Part_B
 **Part_A**   
 原图：  
 ![原图](./examples/IMG_2.jpg)   
-Ground Truth & Estimate：  
+Ground Truth (1111) & Estimate (1256)：  
 ![GT](./examples/heatmap_gt_IMG_2.png "Ground Truth")&nbsp;![Estimate](./examples/heatmap_IMG_2.png "Estimate")
 
 **Part_B**   
 原图：  
 ![原图](./examples/IMG_148.jpg)   
-Ground Truth & Estimate：  
+Ground Truth (252) & Estimate(242)：  
 ![GT](./examples/heatmap_gt_IMG_148.png "Ground Truth")&nbsp;![Estimate](./examples/heatmap_IMG_148.png "Estimate")
  
