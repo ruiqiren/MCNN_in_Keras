@@ -26,6 +26,7 @@ def main(args):
     test_path = cfg.TEST_PATH.format(dataset)
     test_gt_path = cfg.TEST_GT_PATH.format(dataset)
     # load test set
+    print('Loading data, wait a moment...')
     data_loader = DataLoader(test_path, test_gt_path, shuffle=False, gt_downsample=True)
     # load model
     model = load_model(model_path)

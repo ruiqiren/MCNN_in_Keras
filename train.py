@@ -17,13 +17,15 @@ def main(args):
     train_gt_path = cfg.TRAIN_GT_PATH.format(dataset)
     val_path = cfg.VAL_PATH.format(dataset)
     val_gt_path = cfg.VAL_GT_PATH.format(dataset)
-    # 加载数据生成器
+    # 加载数据
+    print('Loading data, wait a moment...')
     train_data_gen = DataLoader(train_path, train_gt_path, shuffle=True, gt_downsample=True)
     val_data_gen = DataLoader(val_path, val_gt_path, shuffle=False, gt_downsample=True)
 
     # 定义模型
     input_shape = (None, None, 1)
     model = MCNN(input_shape)
+    # 编译
     adam = Adam(lr=1e-4)
     model.compile(loss='mse', optimizer=adam, metrics=[mae, mse])
 
